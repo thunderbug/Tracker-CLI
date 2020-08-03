@@ -1,5 +1,6 @@
 {
     "require": {
-        "catfan/medoo": "^1.7"
+        "catfan/medoo": "^1.7",
+        "thunderbug/tracker-quake-connection": "^1.0"
     }
 }
