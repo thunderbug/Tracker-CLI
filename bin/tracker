@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+use Spatie\Async\Pool;
+use Thunderbug\QuakeConnection\Master\Master;
+use Thunderbug\QuakeConnection\Server\Gameserver;
+use Thunderbug\Tracker\Tracker;
+
+if (!in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
+    echo 'Warning: The console should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+}
+
+set_time_limit(0);
+
+require_once("../vendor/autoload.php");
+
+$pool = Pool::create();
+$pool->autoload(__DIR__ . "/vendor/autoload.php");
+
+$master = new Master("cod4master.activision.com", 20810);
+$servers = $master->getServerList();
+foreach ($servers as $server) {
+    $pool
+        ->concurrency(200)
+        ->add(function () use ($server) {
+        $start = microtime(true);
+        $gameserver = new Gameserver($server->getIp(), $server->getPort());
+        $gameserver->getStatus();
+
+        $time = microtime(true) - $start;
+
+        print($server->getIp().":".$server->getPort()." ".$time."\n");
+
+        })
+        ->catch(function (Exception $e) {})
+        ->then(function ($output){
+            print($output);
+        });
+
+    // +- 300 ms of processing time for each server
+}
+
+$pool->wait();
+
