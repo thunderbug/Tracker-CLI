@@ -15,7 +15,22 @@ The tracker cli is the command interface for getting live information from the m
 * Create libs to retrieve information from the servers
 * ...
 
+## Installation
+
+You can download the library via composer:
+
+```composer log
+composer require thunderbug/tracker-quake-connection
+```
+
 ## Start using
 
 Define the database connection in `config/db.php`<br />
-Run in command `tracker`
+Run in command `vendor/bin/tracker`
+
+### Envoirment variables
+
+`DB_HOST` The hostname or ip of the database<br />
+`DB_DATABASE` The database name<br />
+`DB_USERNAME` Username of the database connection<br />
+`DB_PASSWORD` Password of the database connection  

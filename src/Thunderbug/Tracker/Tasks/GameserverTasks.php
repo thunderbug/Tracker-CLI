@@ -36,5 +36,6 @@ class GameserverTasks extends Task
     {
         $gameserver = new Gameserver($this->server->getIp(), $this->server->getPort());
         $gameserver->getStatus($cvarlist, $playerlist);
+        print_r($cvarlist);
     }
 }

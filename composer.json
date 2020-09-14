@@ -1,14 +1,9 @@
 {
     "name": "thunderbug/tracker-cli",
-    "type": "project",
+    "type": "library",
     "description": "CLI interface to retrieve information from all the gameservers in a database",
     "keywords": ["php", "quake", "master", "gameserver", "wolfenstein", "call of duty", "modern warfare", "Call of Duty 2", "Call of Duty 4", "Call of Duty 1"],
     "license": "MIT",
-    "require": {
-        "catfan/medoo": "^1.7",
-        "thunderbug/tracker-quake-connection": "^1.0",
-        "spatie/async": "^1.4"
-    },
     "authors": [
         {
             "name": "Wim F.",
@@ -17,10 +12,18 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "catfan/medoo": "^1.7",
+        "thunderbug/tracker-quake-connection": "^1.0",
+        "spatie/async": "^1.4"
+    },
     "autoload": {
         "classmap": [
             "src/"
         ]
     },
-    "bin": ["bin/tracker"]
+    "require-dev": {
+
+    },
+    "bin": [ "bin/tracker"]
 }
